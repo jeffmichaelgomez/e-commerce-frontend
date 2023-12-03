@@ -1,36 +1,36 @@
-import { Fragment } from "react";
-import Checkout from "../components/Checkout";
-import Accordion from "react-bootstrap/Accordion";
-import CartContent from "../components/CartContent";
-import { Row, Col, Button, Container } from "react-bootstrap";
-import Swal from "sweetalert2";
-import { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { Fragment } from 'react';
+import Checkout from '../components/Checkout';
+import Accordion from 'react-bootstrap/Accordion';
+import CartContent from '../components/CartContent';
+import { Row, Col, Button, Container } from 'react-bootstrap';
+import Swal from 'sweetalert2';
+import { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 export default function Profile() {
 	const [show, setShow] = useState(false);
-	const userToken = localStorage.getItem("token");
+	const userToken = localStorage.getItem('token');
 	let [total, setTotal] = useState(0);
 	let history = useHistory();
 	function checkOut(e) {
 		e.preventDefault();
-		fetch("https://frozen-fjord-80490.herokuapp.com/checkOut", {
-			method: "POST",
+		fetch('https://cyan-weary-whale.cyclic.app/checkOut', {
+			method: 'POST',
 			headers: {
 				Authorization: `Bearer ${userToken}`,
 			},
 		}).then((res) => res.json());
-		Swal.fire("Removed!", "Your order has been removed.", "success").then(
+		Swal.fire('Removed!', 'Your order has been removed.', 'success').then(
 			(result) => {
 				if (result.isConfirmed) {
-					onClick: history.push("/");
+					onClick: history.push('/');
 				}
 			}
 		);
 	}
 	useEffect(() => {
-		fetch("https://frozen-fjord-80490.herokuapp.com/myOrders", {
-			method: "GET",
+		fetch('https://cyan-weary-whale.cyclic.app/myOrders', {
+			method: 'GET',
 			headers: {
 				Authorization: `Bearer ${userToken}`,
 			},
@@ -44,7 +44,7 @@ export default function Profile() {
 	}, []);
 
 	return (
-		<Container style={{ minHeight: "660px" }}>
+		<Container style={{ minHeight: '660px' }}>
 			<Fragment>
 				<div className="my-3">
 					<h3>My Profile</h3>

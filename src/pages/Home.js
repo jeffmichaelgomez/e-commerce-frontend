@@ -1,18 +1,18 @@
-import { Fragment, useState, useEffect, useContext } from "react";
-import UserContext from "../UserContext";
-import CarouselHome from "../components/CarouselHome";
-import HomeSpace from "../components/HomeSpace";
-import "../App.css";
+import { Fragment, useState, useEffect, useContext } from 'react';
+import UserContext from '../UserContext';
+import CarouselHome from '../components/CarouselHome';
+import HomeSpace from '../components/HomeSpace';
+import '../App.css';
 
 export default function Home() {
-	const userToken = localStorage.getItem("token");
+	const userToken = localStorage.getItem('token');
 	const { user, setUser } = useContext(UserContext);
 
 	document.addEventListener(
-		"DOMContentLoaded",
+		'DOMContentLoaded',
 		function () {
-			fetch("https://frozen-fjord-80490.herokuapp.com/details", {
-				method: "GET",
+			fetch('https://cyan-weary-whale.cyclic.app/details', {
+				method: 'GET',
 				headers: {
 					Authorization: `Bearer ${userToken}`,
 				},

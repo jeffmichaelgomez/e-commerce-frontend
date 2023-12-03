@@ -1,28 +1,28 @@
-import { Container, Card, Col, Button, Form } from "react-bootstrap";
-import { useState, useEffect, useContext } from "react";
-import Swal from "sweetalert2";
-import { useHistory, Redirect } from "react-router-dom";
-import UserContext from "../UserContext";
-import { Link } from "react-router-dom";
-import "../App.css";
+import { Container, Card, Col, Button, Form } from 'react-bootstrap';
+import { useState, useEffect, useContext } from 'react';
+import Swal from 'sweetalert2';
+import { useHistory, Redirect } from 'react-router-dom';
+import UserContext from '../UserContext';
+import { Link } from 'react-router-dom';
+import '../App.css';
 
 export default function Register() {
-	const userToken = localStorage.getItem("token");
+	const userToken = localStorage.getItem('token');
 	const { user } = useContext(UserContext);
-	const [email, setEmail] = useState("");
-	const [password1, setPassword1] = useState("");
-	const [password2, setPassword2] = useState("");
+	const [email, setEmail] = useState('');
+	const [password1, setPassword1] = useState('');
+	const [password2, setPassword2] = useState('');
 	const [isActive, setIsActive] = useState(false);
-	const [fullName, setFullName] = useState("");
-	const [address, setAddress] = useState("");
+	const [fullName, setFullName] = useState('');
+	const [address, setAddress] = useState('');
 	let history = useHistory();
 
 	function registerUser(e) {
 		e.preventDefault();
-		fetch("https://frozen-fjord-80490.herokuapp.com/checkEmail", {
-			method: "POST",
+		fetch('https://cyan-weary-whale.cyclic.app/checkEmail', {
+			method: 'POST',
 			headers: {
-				"Content-Type": "application/json",
+				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify({
 				email: email,
@@ -31,10 +31,10 @@ export default function Register() {
 			.then((res) => res.json())
 			.then((data) => {
 				if (data === false) {
-					fetch("https://frozen-fjord-80490.herokuapp.com/register", {
-						method: "POST",
+					fetch('https://cyan-weary-whale.cyclic.app/register', {
+						method: 'POST',
 						headers: {
-							"Content-Type": "application/json",
+							'Content-Type': 'application/json',
 						},
 						body: JSON.stringify({
 							name: fullName,
@@ -46,34 +46,34 @@ export default function Register() {
 						.then((res) => res.json())
 						.then((data) => {
 							Swal.fire({
-								title: "Registration Successful",
-								icon: "success",
-								text: "Welcome to Zuitt",
+								title: 'Registration Successful',
+								icon: 'success',
+								text: 'Welcome to Zuitt',
 							});
-							history.push("/login");
+							history.push('/login');
 						});
 				} else {
 					Swal.fire({
-						title: "Duplicate email found",
-						icon: "error",
-						text: "Please provide different email",
+						title: 'Duplicate email found',
+						icon: 'error',
+						text: 'Please provide different email',
 					});
 				}
 			});
 
-		setEmail("");
-		setPassword2("");
-		setPassword1("");
-		setFullName("");
-		setAddress("");
+		setEmail('');
+		setPassword2('');
+		setPassword1('');
+		setFullName('');
+		setAddress('');
 	}
 
 	useEffect(() => {
 		if (
-			fullName !== "" &&
-			address !== "" &&
-			password1 !== "" &&
-			password2 !== "" &&
+			fullName !== '' &&
+			address !== '' &&
+			password1 !== '' &&
+			password2 !== '' &&
 			password1 === password2
 		) {
 			setIsActive(true);
@@ -89,7 +89,7 @@ export default function Register() {
 			<Container
 				fluid="lg"
 				className="d-flex justify-content-center"
-				style={{ minHeight: "679px", color: "white" }}
+				style={{ minHeight: '679px', color: 'white' }}
 			>
 				<Form onSubmit={(e) => registerUser(e)}>
 					<Col>

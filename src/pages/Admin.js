@@ -1,28 +1,28 @@
-import Accordion from "react-bootstrap/Accordion";
-import UserContext from "../UserContext";
-import { Container, Col, Button, Form, Row, Card } from "react-bootstrap";
-import { useContext, Fragment, useState, useEffect } from "react";
-import { useHistory, Redirect } from "react-router-dom";
-import Swal from "sweetalert2";
-import AdminProductCard from "../components/AdminProductCard";
-import "../App.css";
+import Accordion from 'react-bootstrap/Accordion';
+import UserContext from '../UserContext';
+import { Container, Col, Button, Form, Row, Card } from 'react-bootstrap';
+import { useContext, Fragment, useState, useEffect } from 'react';
+import { useHistory, Redirect } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import AdminProductCard from '../components/AdminProductCard';
+import '../App.css';
 
 export default function Admin() {
-	const userToken = localStorage.getItem("token");
+	const userToken = localStorage.getItem('token');
 	const { user, setUser } = useContext(UserContext);
-	const [pName, setPName] = useState("");
-	const [pDescription, setPDescription] = useState("");
-	const [pPrice, setPPrice] = useState("");
-	const [pImage, setPImage] = useState("");
-	const [pCategory, setPCategory] = useState("");
+	const [pName, setPName] = useState('');
+	const [pDescription, setPDescription] = useState('');
+	const [pPrice, setPPrice] = useState('');
+	const [pImage, setPImage] = useState('');
+	const [pCategory, setPCategory] = useState('');
 	const [ispActive, setIspActive] = useState(false);
 	const [adminProducts, setAdminProducts] = useState([]);
 
 	document.addEventListener(
-		"DOMContentLoaded",
+		'DOMContentLoaded',
 		function () {
-			fetch("https://frozen-fjord-80490.herokuapp.com/details", {
-				method: "GET",
+			fetch('https://cyan-weary-whale.cyclic.app/details', {
+				method: 'GET',
 				headers: {
 					Authorization: `Bearer ${userToken}`,
 				},
@@ -40,8 +40,8 @@ export default function Admin() {
 	);
 
 	useEffect(() => {
-		fetch("https://frozen-fjord-80490.herokuapp.com/products/admin", {
-			method: "GET",
+		fetch('https://cyan-weary-whale.cyclic.app/products/admin', {
+			method: 'GET',
 			headers: {
 				Authorization: `Bearer ${userToken}`,
 			},
@@ -66,11 +66,11 @@ export default function Admin() {
 
 	function registerProduct(e) {
 		e.preventDefault();
-		fetch("https://frozen-fjord-80490.herokuapp.com/products", {
-			method: "POST",
+		fetch('https://cyan-weary-whale.cyclic.app/products', {
+			method: 'POST',
 			headers: {
 				Authorization: `Bearer ${userToken}`,
-				"Content-Type": "application/json",
+				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify({
 				name: pName,
@@ -84,15 +84,15 @@ export default function Admin() {
 			.then((data) => {
 				if (data !== false) {
 					Swal.fire({
-						title: "Registration Successful",
-						icon: "success",
-						text: "Product has been added",
+						title: 'Registration Successful',
+						icon: 'success',
+						text: 'Product has been added',
 					});
 				} else {
 					Swal.fire({
-						title: "Duplicate product found",
-						icon: "error",
-						text: "Please provide different product",
+						title: 'Duplicate product found',
+						icon: 'error',
+						text: 'Please provide different product',
 					});
 				}
 			});
@@ -106,11 +106,11 @@ export default function Admin() {
 
 	useEffect(() => {
 		if (
-			pName !== "" &&
-			pDescription !== "" &&
-			pPrice !== "" &&
-			pImage !== "" &&
-			(pCategory == "Peripherals" || pCategory == "Components")
+			pName !== '' &&
+			pDescription !== '' &&
+			pPrice !== '' &&
+			pImage !== '' &&
+			(pCategory == 'Peripherals' || pCategory == 'Components')
 		) {
 			setIspActive(true);
 		} else {
@@ -121,7 +121,7 @@ export default function Admin() {
 	return user.isAdmin !== true ? (
 		<Redirect to="/" />
 	) : (
-		<Container style={{ minHeight: "660px" }}>
+		<Container style={{ minHeight: '660px' }}>
 			<Fragment>
 				<div className="my-3">
 					<h1>Admin Page</h1>

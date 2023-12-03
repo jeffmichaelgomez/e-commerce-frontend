@@ -1,28 +1,28 @@
-import PropTypes from "prop-types";
-import { Card, Form } from "react-bootstrap";
-import { Col, Button, Row, Offcanvas } from "react-bootstrap";
-import Swal from "sweetalert2";
-import { Fragment, useState, useEffect } from "react";
+import PropTypes from 'prop-types';
+import { Card, Form } from 'react-bootstrap';
+import { Col, Button, Row, Offcanvas } from 'react-bootstrap';
+import Swal from 'sweetalert2';
+import { Fragment, useState, useEffect } from 'react';
 
 export default function AdminProductCard({ adminProductProp }) {
-	const userToken = localStorage.getItem("token");
+	const userToken = localStorage.getItem('token');
 	const { _id, isActive, name, description, price } = adminProductProp;
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
 	const [show, setShow] = useState(false);
-	const [aName, setAName] = useState("");
-	const [aDescription, setADescription] = useState("");
-	const [aPrice, setAPrice] = useState("");
-	const [aImage, setAImage] = useState("");
-	const [aCategory, setACategory] = useState("");
+	const [aName, setAName] = useState('');
+	const [aDescription, setADescription] = useState('');
+	const [aPrice, setAPrice] = useState('');
+	const [aImage, setAImage] = useState('');
+	const [aCategory, setACategory] = useState('');
 	const [isaActive, setIsaActive] = useState(false);
 
 	function updateProduct(e) {
-		fetch(`https://frozen-fjord-80490.herokuapp.com/products/${_id}`, {
-			method: "PUT",
+		fetch(`https://cyan-weary-whale.cyclic.app/products/${_id}`, {
+			method: 'PUT',
 			headers: {
 				Authorization: `Bearer ${userToken}`,
-				"Content-Type": "application/json",
+				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify({
 				name: aName,
@@ -35,10 +35,10 @@ export default function AdminProductCard({ adminProductProp }) {
 			.then((res) => res.json())
 			.then((data) => {
 				Swal.fire({
-					title: "Successfully Updated!",
-					icon: "success",
-					text: "Product has been updated.",
-					confirmButtonText: "OK",
+					title: 'Successfully Updated!',
+					icon: 'success',
+					text: 'Product has been updated.',
+					confirmButtonText: 'OK',
 				}).then((result) => {
 					if (result.isConfirmed) {
 						onClick: window.location.reload(false);
@@ -47,16 +47,16 @@ export default function AdminProductCard({ adminProductProp }) {
 			});
 	}
 	function disableProduct(e) {
-		fetch(`https://frozen-fjord-80490.herokuapp.com/products/${_id}/archive`, {
-			method: "PUT",
+		fetch(`https://cyan-weary-whale.cyclic.app/products/${_id}/archive`, {
+			method: 'PUT',
 			headers: {
 				Authorization: `Bearer ${userToken}`,
 			},
 		}).then((res) => res.json());
 	}
 	function enableProduct(e) {
-		fetch(`https://frozen-fjord-80490.herokuapp.com/products/${_id}/restock`, {
-			method: "PUT",
+		fetch(`https://cyan-weary-whale.cyclic.app/products/${_id}/restock`, {
+			method: 'PUT',
 			headers: {
 				Authorization: `Bearer ${userToken}`,
 			},
@@ -65,11 +65,11 @@ export default function AdminProductCard({ adminProductProp }) {
 
 	useEffect(() => {
 		if (
-			aName !== "" &&
-			aDescription !== "" &&
-			aPrice !== "" &&
-			aImage !== "" &&
-			(aCategory == "Peripherals" || aCategory == "Components")
+			aName !== '' &&
+			aDescription !== '' &&
+			aPrice !== '' &&
+			aImage !== '' &&
+			(aCategory == 'Peripherals' || aCategory == 'Components')
 		) {
 			setIsaActive(true);
 		} else {
@@ -106,7 +106,7 @@ export default function AdminProductCard({ adminProductProp }) {
 						className="d-flex justify-content-start mb-0 pb-0"
 						md={1}
 					>
-						<Card.Text>{isActive ? "Enabled" : "Disabled"}</Card.Text>
+						<Card.Text>{isActive ? 'Enabled' : 'Disabled'}</Card.Text>
 					</Col>
 					<Col
 						className="d-flex justify-content-start mt-0 pt-0"

@@ -1,13 +1,13 @@
-import { Button, Offcanvas } from "react-bootstrap";
-import { useEffect, useState, Fragment } from "react";
-import cart from "../logo/cart.png";
-import CartContent from "../components/CartContent";
-import Swal from "sweetalert2";
-import { useHistory, Redirect } from "react-router-dom";
+import { Button, Offcanvas } from 'react-bootstrap';
+import { useEffect, useState, Fragment } from 'react';
+import cart from '../logo/cart.png';
+import CartContent from '../components/CartContent';
+import Swal from 'sweetalert2';
+import { useHistory, Redirect } from 'react-router-dom';
 
 export default function Cart() {
 	const [show, setShow] = useState(false);
-	const userToken = localStorage.getItem("token");
+	const userToken = localStorage.getItem('token');
 	let [total, setTotal] = useState(0);
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
@@ -15,24 +15,24 @@ export default function Cart() {
 
 	function checkOut(e) {
 		e.preventDefault();
-		fetch("https://frozen-fjord-80490.herokuapp.com/checkOut", {
-			method: "POST",
+		fetch('https://cyan-weary-whale.cyclic.app/checkOut', {
+			method: 'POST',
 			headers: {
 				Authorization: `Bearer ${userToken}`,
 			},
 		}).then((res) => res.json());
-		Swal.fire("Order Successful!", "Thank you for shopping!.", "success").then(
+		Swal.fire('Order Successful!', 'Thank you for shopping!.', 'success').then(
 			(result) => {
 				if (result.isConfirmed) {
-					onClick: history.push("/");
+					onClick: history.push('/');
 				}
 			}
 		);
 	}
 
 	useEffect(() => {
-		fetch("https://frozen-fjord-80490.herokuapp.com/myOrders", {
-			method: "GET",
+		fetch('https://cyan-weary-whale.cyclic.app/myOrders', {
+			method: 'GET',
 			headers: {
 				Authorization: `Bearer ${userToken}`,
 			},

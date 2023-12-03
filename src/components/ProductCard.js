@@ -1,18 +1,18 @@
-import PropTypes from "prop-types";
-import { Card } from "react-bootstrap";
-import { Col, Button } from "react-bootstrap";
-import Swal from "sweetalert2";
+import PropTypes from 'prop-types';
+import { Card } from 'react-bootstrap';
+import { Col, Button } from 'react-bootstrap';
+import Swal from 'sweetalert2';
 
 export default function ProductCard({ productProp }) {
 	//console.log(props);
-	const userToken = localStorage.getItem("token");
+	const userToken = localStorage.getItem('token');
 	const { _id, name, description, price, image } = productProp;
 	function addToCart(e) {
-		fetch("https://frozen-fjord-80490.herokuapp.com/addToCart", {
-			method: "POST",
+		fetch('https://cyan-weary-whale.cyclic.app/addToCart', {
+			method: 'POST',
 			headers: {
 				Authorization: `Bearer ${userToken}`,
-				"Content-Type": "application/json",
+				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify({
 				id: _id,
@@ -21,10 +21,10 @@ export default function ProductCard({ productProp }) {
 			.then((res) => res.json())
 			.then((data) => {
 				Swal.fire({
-					title: "Successfully Added",
-					icon: "success",
-					text: "Happy Shopping!",
-					confirmButtonText: "Continue Shopping",
+					title: 'Successfully Added',
+					icon: 'success',
+					text: 'Happy Shopping!',
+					confirmButtonText: 'Continue Shopping',
 				}).then((result) => {
 					if (result.isConfirmed) {
 						onClick: window.location.reload(false);
@@ -39,7 +39,7 @@ export default function ProductCard({ productProp }) {
 			lg={3}
 			className="mb-3"
 		>
-			<Card style={{ width: "18rem" }}>
+			<Card style={{ width: '18rem' }}>
 				<Card.Img
 					variant="top"
 					className="imageProduct"

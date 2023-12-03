@@ -1,14 +1,14 @@
-import { Fragment, useEffect, useState } from "react";
-import ProductCard from "../components/ProductCard";
-import { Container, Row } from "react-bootstrap";
-import Cart from "../components/Cart";
+import { Fragment, useEffect, useState } from 'react';
+import ProductCard from '../components/ProductCard';
+import { Container, Row } from 'react-bootstrap';
+import Cart from '../components/Cart';
 // import LoginUser from '../components/LoginUser'
 
 export default function Products() {
 	const [products, setProducts] = useState([]);
 
 	useEffect(() => {
-		fetch("https://frozen-fjord-80490.herokuapp.com/products")
+		fetch('https://cyan-weary-whale.cyclic.app/products')
 			.then((res) => res.json())
 			.then((data) => {
 				console.log(data);

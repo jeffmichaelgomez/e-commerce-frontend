@@ -1,24 +1,24 @@
-import PropTypes from "prop-types";
-import { Card, InputGroup, Form } from "react-bootstrap";
-import { Col, Button } from "react-bootstrap";
-import Swal from "sweetalert2";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
-import ButtonToolbar from "react-bootstrap/ButtonToolbar";
-import "../App.css";
-import { useEffect, useState, Fragment } from "react";
+import PropTypes from 'prop-types';
+import { Card, InputGroup, Form } from 'react-bootstrap';
+import { Col, Button } from 'react-bootstrap';
+import Swal from 'sweetalert2';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
+import '../App.css';
+import { useEffect, useState, Fragment } from 'react';
 
 export default function CartCard({ cartProp }) {
 	//console.log(props);
-	const userToken = localStorage.getItem("token");
+	const userToken = localStorage.getItem('token');
 	const { _id, productName, subTotal, quantity, image } = cartProp;
 
 	function addOne(e) {
 		e.preventDefault();
-		fetch("https://frozen-fjord-80490.herokuapp.com/increaseQuantity", {
-			method: "POST",
+		fetch('https://cyan-weary-whale.cyclic.app/increaseQuantity', {
+			method: 'POST',
 			headers: {
 				Authorization: `Bearer ${userToken}`,
-				"Content-Type": "application/json",
+				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify({
 				id: _id,
@@ -30,27 +30,27 @@ export default function CartCard({ cartProp }) {
 		e.preventDefault();
 		if (quantity == 1) {
 			Swal.fire({
-				title: "Are you sure?",
+				title: 'Are you sure?',
 				text: "You won't be able to revert this!",
-				icon: "warning",
+				icon: 'warning',
 				showCancelButton: true,
-				confirmButtonColor: "#3085d6",
-				cancelButtonColor: "#d33",
-				confirmButtonText: "Yes, delete it!",
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Yes, delete it!',
 			}).then((result) => {
 				if (result.isConfirmed) {
-					fetch("https://frozen-fjord-80490.herokuapp.com/removeOneProduct", {
-						method: "POST",
+					fetch('https://cyan-weary-whale.cyclic.app/removeOneProduct', {
+						method: 'POST',
 						headers: {
 							Authorization: `Bearer ${userToken}`,
-							"Content-Type": "application/json",
+							'Content-Type': 'application/json',
 						},
 						body: JSON.stringify({
 							id: _id,
 						}),
 					}).then((res) => res.json());
 
-					Swal.fire("Removed!", "Your order has been removed.", "success").then(
+					Swal.fire('Removed!', 'Your order has been removed.', 'success').then(
 						(result) => {
 							if (result.isConfirmed) {
 								onClick: window.location.reload(false);
@@ -60,11 +60,11 @@ export default function CartCard({ cartProp }) {
 				}
 			});
 		} else {
-			fetch("https://frozen-fjord-80490.herokuapp.com/decreaseQuantity", {
-				method: "POST",
+			fetch('https://cyan-weary-whale.cyclic.app/decreaseQuantity', {
+				method: 'POST',
 				headers: {
 					Authorization: `Bearer ${userToken}`,
-					"Content-Type": "application/json",
+					'Content-Type': 'application/json',
 				},
 				body: JSON.stringify({
 					id: _id,
@@ -75,7 +75,7 @@ export default function CartCard({ cartProp }) {
 
 	return (
 		<Col className="mb-3">
-			<Card style={{ width: "18rem" }}>
+			<Card style={{ width: '18rem' }}>
 				<Card.Img
 					variant="top"
 					className="imageProduct"
@@ -91,7 +91,7 @@ export default function CartCard({ cartProp }) {
 								<InputGroup>
 									<InputGroup.Text
 										id="btnGroupAddon"
-										style={{ height: "30px" }}
+										style={{ height: '30px' }}
 									>
 										Quantity:
 									</InputGroup.Text>
@@ -99,14 +99,14 @@ export default function CartCard({ cartProp }) {
 										variant="secondary"
 										className="py-0"
 										onClick={(e) => lessOne(e)}
-										style={{ height: "30px" }}
+										style={{ height: '30px' }}
 									>
 										-
 									</Button>
 									<Fragment>
 										<InputGroup.Text
 											id="btnGroupAddon"
-											style={{ height: "30px" }}
+											style={{ height: '30px' }}
 										>
 											{quantity}
 										</InputGroup.Text>
@@ -115,7 +115,7 @@ export default function CartCard({ cartProp }) {
 										variant="secondary"
 										className="py-0"
 										onClick={(e) => addOne(e)}
-										style={{ height: "30px" }}
+										style={{ height: '30px' }}
 									>
 										+
 									</Button>
